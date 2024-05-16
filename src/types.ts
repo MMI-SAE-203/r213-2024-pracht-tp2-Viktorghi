@@ -1,4 +1,5 @@
-export interface MaisonRecord {
+
+export type MaisonRecord = {
     adresse: string;
     collectionId: string;
     collectionName: string;

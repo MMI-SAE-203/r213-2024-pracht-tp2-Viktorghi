@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { type MaisonRecord } from '@/pocketbase-types';
+import ImgPb from './ImgPb.vue'
+
+const props = defineProps<MaisonRecord>()
+
+</script>
+
 <template>
     <div
   class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative rounded-lg bg-white border-[1.5px] border-indigo-100"
@@ -6,9 +14,8 @@
     <div
       class="w-[342px] h-[200px] absolute left-[-0.5px] top-[-0.5px] rounded-tl-lg rounded-tr-lg bg-gray-500"
     ></div>
-    <img
-      class="w-[342px] h-[235px] absolute left-[-0.5px] top-[-24.5px] object-cover"
-    />
+    <ImgPb :record="props" :filename="image" :width="387" :height="235"
+                class="w-[343px] h-[235px] absolute left-[-0.5px] top-[-24.5px] object-cover rounded-lg" />
   </div>
   <div
     class="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 relative gap-[15px] px-5 py-[30px]"
@@ -17,7 +24,7 @@
       <div class="flex-grow-0 flex-shrink-0 w-[249px] h-[75px]">
         <div class="flex justify-start items-end w-[164.11px] absolute left-0 top-0 gap-0.5">
           <p class="flex-grow-0 flex-shrink-0 text-2xl font-bold text-left text-indigo-500">
-            $2,700
+            {{ price }} $
           </p>
           <p class="flex-grow-0 flex-shrink-0 w-[58px] h-8 text-base text-left text-gray-500">
             /month
@@ -26,14 +33,14 @@
         <p
           class="w-[249px] absolute left-0 top-[43px] text-2xl font-semibold text-left text-gray-900"
         >
-          Beverly Springfield
+        {{ nom }}
         </p>
       </div>
       <svg
         width="48"
         height="48"
         viewBox="0 0 48 48"
-        fill="none"
+        :fill="favoris ? '#6366F1' : 'white'"
         xmlns="http://www.w3.org/2000/svg"
         class="flex-grow-0 flex-shrink-0 w-12 h-12"
         preserveAspectRatio="xMidYMid meet"
@@ -49,7 +56,7 @@
       </svg>
     </div>
     <p class="self-stretch flex-grow-0 flex-shrink-0 w-[302px] text-base text-left text-gray-500">
-      2821 Lake Sevilla, Palm Harbor, TX
+      {{ adresse }}
     </p>
     <svg
       width="302"
@@ -95,7 +102,7 @@
             stroke-linejoin="round"
           ></path>
         </svg>
-        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">4 Beds</p>
+        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nbChambre }}</p>
       </div>
       <div class="flex justify-center items-center flex-grow relative gap-2">
         <svg
@@ -143,7 +150,7 @@
             </clipPath>
           </defs>
         </svg>
-        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">2 Bathrooms</p>
+        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nbSalleBain }}</p>
       </div>
       <div class="flex justify-end items-center flex-grow relative gap-2">
         <svg
@@ -184,7 +191,7 @@
             </clipPath>
           </defs>
         </svg>
-        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">6x7.5 m²</p>
+        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ surface }}</p>
       </div>
     </div>
   </div>
