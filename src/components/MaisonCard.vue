@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { type MaisonRecord } from '@/pocketbase-types';
+import { type MaisonResponse } from '@/pocketbase-types';
 import ImgPb from './ImgPb.vue'
 
-const props = defineProps<MaisonRecord>()
+const props = defineProps<MaisonResponse<any>>()
 
 </script>
 
@@ -102,7 +102,7 @@ const props = defineProps<MaisonRecord>()
             stroke-linejoin="round"
           ></path>
         </svg>
-        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nbChambre }}</p>
+        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nb_de_chambre }}</p>
       </div>
       <div class="flex justify-center items-center flex-grow relative gap-2">
         <svg
@@ -150,7 +150,7 @@ const props = defineProps<MaisonRecord>()
             </clipPath>
           </defs>
         </svg>
-        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nbSalleBain }}</p>
+        <p class="flex-grow-0 flex-shrink-0 text-xs text-left text-gray-600">{{ nb_salle_de_bain }}</p>
       </div>
       <div class="flex justify-end items-center flex-grow relative gap-2">
         <svg
