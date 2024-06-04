@@ -7,6 +7,7 @@ import type { RecordService } from 'pocketbase'
 
 export enum Collections {
 	Agence = "Agence",
+	Agent = "Agent",
 	Maison = "Maison",
 	Users = "users",
 }
@@ -43,8 +44,15 @@ export type AgenceRecord = {
 	tel?: number
 }
 
+export type AgentRecord = {
+	email?: string
+	nom?: string
+	prenom?: string
+}
+
 export type MaisonRecord = {
 	adresse?: string
+	agent?: RecordIdString
 	exclusive?: boolean
 	favoris?: boolean
 	image?: string
@@ -62,6 +70,7 @@ export type UsersRecord = {
 
 // Response types include system fields and match responses from the PocketBase API
 export type AgenceResponse<Texpand = unknown> = Required<AgenceRecord> & BaseSystemFields<Texpand>
+export type AgentResponse<Texpand = unknown> = Required<AgentRecord> & BaseSystemFields<Texpand>
 export type MaisonResponse<Texpand = unknown> = Required<MaisonRecord> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
 
@@ -69,12 +78,14 @@ export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSyste
 
 export type CollectionRecords = {
 	Agence: AgenceRecord
+	Agent: AgentRecord
 	Maison: MaisonRecord
 	users: UsersRecord
 }
 
 export type CollectionResponses = {
 	Agence: AgenceResponse
+	Agent: AgentResponse
 	Maison: MaisonResponse
 	users: UsersResponse
 }
@@ -84,6 +95,7 @@ export type CollectionResponses = {
 
 export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'Agence'): RecordService<AgenceResponse>
+	collection(idOrName: 'Agent'): RecordService<AgentResponse>
 	collection(idOrName: 'Maison'): RecordService<MaisonResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>
 }
